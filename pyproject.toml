@@ -1,0 +1,89 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bbox-api"
+version = "0.1.0"
+description = "Async Python client for the Bouygues Telecom Bbox router API"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "rettelx" }]
+keywords = [
+    "bbox",
+    "bouygues",
+    "bouygues-telecom",
+    "router",
+    "gateway",
+    "api",
+    "async",
+    "aiohttp",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Framework :: AsyncIO",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+dependencies = ["aiohttp>=3.9"]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8",
+    "pytest-asyncio>=1",
+    "aioresponses>=0.7",
+    # aioresponses 0.7.x does not support aiohttp 3.14 yet (ClientResponse
+    # gained a required stream_writer arg); CI pins aiohttp<3.14 for tests.
+    "aiohttp>=3.9,<3.14",
+]
+dev = [
+    "bbox-api[test]",
+    "ruff",
+    "mypy",
+]
+
+[project.urls]
+Homepage = "https://github.com/xavier/bbox-api"
+Repository = "https://github.com/xavier/bbox-api"
+Issues = "https://github.com/xavier/bbox-api/issues"
+Documentation = "https://github.com/xavier/bbox-api#readme"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bbox_api"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/bbox_api", "tests", "README.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "--strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4", "UP", "SIM", "RUF"]
+ignore = ["SIM108"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["bbox_api"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src/bbox_api"]
+warn_unused_ignores = true
+warn_redundant_casts = true
+disallow_untyped_defs = true
