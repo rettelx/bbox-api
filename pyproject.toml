@@ -53,10 +53,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/xavier/bbox-api"
-Repository = "https://github.com/xavier/bbox-api"
-Issues = "https://github.com/xavier/bbox-api/issues"
-Documentation = "https://github.com/xavier/bbox-api#readme"
+Homepage = "https://github.com/rettelx/bbox-api"
+Repository = "https://github.com/rettelx/bbox-api"
+Issues = "https://github.com/rettelx/bbox-api/issues"
+Documentation = "https://github.com/rettelx/bbox-api#readme"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/bbox_api"]
